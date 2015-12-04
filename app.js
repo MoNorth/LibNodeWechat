@@ -28,9 +28,43 @@ wechat.retext(function(ok,req,res,result) {
 });
 
 
+var data = function(title,description,picUrl,url) {
+		this.Title = title;
+		this.Description = description;
+		this.PicUrl = picUrl;
+		this.Url = url;
+	}
+
 /**
  * 搜索图书
  */
+var makeNews = function(detail) {
+	if(!detail)
+	{
+		return false;
+	}
+	var bookData = detail.BookData;
+	if(!bookData)
+	{
+		return false;
+	}
+	var array = []
+	for(var i in bookData)
+	{
+		array.push(new data(bookData[i]["Title"],
+							bookData[i]["Author"],
+							bookData[i]["Images"] 
+							? bookData[i]["Images"]["large"] 
+							|| bookData[i]["Images"]["medium"] 
+							|| bookData[i]["Images"]["small"]
+							: "https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png",
+							"http://borth.gitcafe.io"
+			));
+	}
+	return array;
+}
+
+
 
 var search = function(req,res,result) {
 	var bookName = result.content;
@@ -49,8 +83,27 @@ var search = function(req,res,result) {
 		},
 		function(err,re,body) {
 			if(err)
+			{
 				res.sendText(err);
-			console.log(body);
+				return;
+			}
+			if(re.statusCode != 200)
+			{
+				res.sendText("请重试");
+				return;
+			}
+			if(!body)
+			{
+				res.sendText("请重试");
+				return;
+			}
+			body = JSON.parse(body);
+			if(body.Result)
+			{
+				res.sendNews(makeNews(body.Detail));
+			}
+			else
+				res.sendText("请重试");
 		}
 		);
 	// res.sendText("");
