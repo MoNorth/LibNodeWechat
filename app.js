@@ -28,25 +28,9 @@ wechat.retext(function(ok,req,res,result) {
 });
 
 
-wechat.reclick({
-	"ser_book":searchClick
-},"");
-
-
-//监听
-
-app.listen(8080);
-
-
-
 /**
  * 搜索图书
  */
-
-var searchClick = function(req,res,result) {
-	wechat.createSession(result,search);
-	res.sendText("请输入图书关键字");
-}
 
 var search = function(req,res,result) {
 	var bookName = result.content;
@@ -58,3 +42,22 @@ var search = function(req,res,result) {
 		}
 		);
 }
+
+var searchClick = function(req,res,result) {
+	wechat.createSession(result,search);
+	res.sendText("请输入图书关键字");
+}
+
+
+
+wechat.reclick({
+	"ser_book":searchClick
+},"");
+
+
+//监听
+
+app.listen(8080);
+
+
+
