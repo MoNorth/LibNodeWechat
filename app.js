@@ -34,6 +34,7 @@ wechat.retext(function(ok,req,res,result) {
 
 var search = function(req,res,result) {
 	var bookName = result.content;
+	console.log(bookName);
 	var url = "http://api.xiyoumobile.com/xiyoulibv2/book/search?page=1&size=10&keyword=" + bookName;
 	request(
 		url,
