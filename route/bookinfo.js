@@ -4,7 +4,7 @@ var request = require("request");
 var htmlsrc = path.join(__dirname , "bookinfo.html");
 var html = fs.readFileSync(htmlsrc,"utf-8");
 function bookinfo (req,res,next) {
-	var id = req.params.id;
+	var id = req.query.id;
 	var url = "http://api.xiyoumobile.com/xiyoulibv2/book/detail/id/" + id;
 	request(
 		{
