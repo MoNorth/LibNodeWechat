@@ -38,13 +38,12 @@ var search = function(req,res,result) {
 	var url = "http://api.xiyoumobile.com/xiyoulibv2/book/search";
 	request(
 		{
-			uri : url,
-			encoding: null,
+			url : url,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body : {"page" : 1,
+            form : {"page" : 1,
             		"size" : 10,
             		"keyword" : bookName}
 		},
