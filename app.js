@@ -48,7 +48,7 @@ var search = function(req,res,result) {
             		"size" : 10,
             		"keyword" : bookName}
 		},
-		function(err,res,body) {
+		function(err,re,body) {
 			if(err)
 				res.sendText(err);
 			console.log(body);
