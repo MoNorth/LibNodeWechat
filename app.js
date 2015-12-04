@@ -9,6 +9,7 @@ var app = express();
 var wechat_node = require("wechat-node");
 var wechat = new wechat_node(app,"wx2d99e56a3326b348","d4624c36b6795d1d99dcf0547af5443d","northk");
 var request = require("request");
+var bookinfo = require("./route/bookinfo");
 
 //设置菜单
 //
@@ -58,7 +59,7 @@ var makeNews = function(detail) {
 							|| bookData[i]["Images"]["medium"] 
 							|| bookData[i]["Images"]["small"]
 							: "https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png",
-							"http://borth.gitcafe.io"
+							"http://node.northk.wang/book?id=" + bookData[i]["ID"]
 			));
 	}
 	return array;
@@ -100,7 +101,11 @@ var search = function(req,res,result) {
 			body = JSON.parse(body);
 			if(body.Result)
 			{
-				res.sendNews(makeNews(body.Detail));
+				var news = makeNews(body.Detail);
+				if(news)
+					res.sendNews(news);
+				else
+					res.sendText("请重试");
 			}
 			else
 				res.sendText("请重试");
@@ -124,6 +129,10 @@ wechat.reclick({
 //监听
 
 app.listen(8080);
+
+
+
+app.get("/book",bookinfo);
 
 
 
