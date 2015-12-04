@@ -30,7 +30,7 @@ wechat.retext(function(ok,req,res,result) {
 
 wechat.reclick({
 	"ser_book":searchClick
-});
+},"");
 
 
 //监听
