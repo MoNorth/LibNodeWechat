@@ -39,10 +39,12 @@ var search = function(req,res,result) {
 	request(
 		url,
 		function(err,res,body) {
+			if(err)
+				res.sendText(err);
 			console.log(body);
 		}
 		);
-	res.sendText("");
+	// res.sendText("");
 }
 
 var searchClick = function(req,res,result) {
