@@ -1,8 +1,6 @@
-var fs = require("fs");
-var path = require("path");
+
 var request = require("request");
-var htmlsrc = path.join(__dirname , "bookinfo.html");
-var html = fs.readFileSync(htmlsrc,"utf-8");
+
 function bookinfo (req,res,next) {
 	var id = req.query.id;
 	var url = "http://api.xiyoumobile.com/xiyoulibv2/book/detail/id/" + id;
@@ -18,11 +16,11 @@ function bookinfo (req,res,next) {
 			body = JSON.parse(body);
 			if(body.Result && re.statusCode === 200)
 			{
-				res.send(makehtml(body.Detail));
+				res.render("bookDetail",makehtml(body.Detail));
 			}
 			else
 			{
-				res.send(body);
+				res.render("error");
 			}
 		});
 
@@ -30,18 +28,30 @@ function bookinfo (req,res,next) {
 
 
 var makehtml = function(Detail) {
-	
-   return html.replace("%img%",Detail["DoubanInfo"] 
-						? ( Detail["DoubanInfo"]["Images"]
-							? Detail["DoubanInfo"]["Images"]["large"]
-							|| Detail["DoubanInfo"]["Images"]["medium"]
-							|| Detail["DoubanInfo"]["Images"]["small"]
-							: "https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png")
-						: "https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png"
-				).replace("%Title%",Detail["Tilte"])
-				 .replace("%Author%",Detail["Author"])
-				 .replace("%Pub%",Detail["Pub"]);
+	var obj = {
+		title:"",
+		pub : "",
+		author : "",
+		subject : "",
+		img : "https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png"
 
+	};
+	if(Detail.Title)
+		obj.title = Detail.Title;
+	if(Detail.Pub)
+		obj.pub = Detail.Pub;
+	if(Detail.Author)
+		obj.author = Detail.Author;
+	if(Detail.Subject)
+		obj.subject = Detail.Subject;
+	if(Detail.DoubanInfo && Detail.DoubanInfo.Images)
+	{
+		obj.img = Detail.DoubanInfo.Images.large || 
+				  Detail.DoubanInfo.Images.medium || 
+				  Detail.DoubanInfo.Images.small;
+
+	}
+	return obj;
 }
 
 
