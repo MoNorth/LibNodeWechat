@@ -56,7 +56,7 @@ var dbOpen = function(callback) {
 }
 
 
-exports.select = select;
+// exports.select = select;
 
 
 
@@ -65,30 +65,30 @@ exports.select = select;
 
 
 
-// db.open(function(err,db) {
-// 	if(err)
-// 	{
-// 		console.log(err);
-// 		return;
-// 	}
-// 	db.collection("test",{safe:true},function(err,collection) {
-// 		if(err)
-// 		{
-// 			console.log(err);
-// 			return;
-// 		}
-// 		collection.find({title:"接啊接啊就"}).toArray(function(err,docs) {
-// 			// db.close();
-// 			console.log(docs);
+db.open(function(err,db) {
+	if(err)
+	{
+		console.log(err);
+		return;
+	}
+	db.collection("test",{safe:true},function(err,collection) {
+		if(err)
+		{
+			console.log(err);
+			return;
+		}
+		collection.find({title:"接啊接啊就"}).toArray(function(err,docs) {
+			db.close();
+			console.log(docs);
 			
-// 		});
-// 		// collection.fineOne(function(err,doc) {
-// 		// 	console.log(doc);
-// 		// 	db.close();
-// 		// })
+		});
+		// collection.fineOne(function(err,doc) {
+		// 	console.log(doc);
+		// 	db.close();
+		// })
 
-// 	})
-// });
+	})
+});
 
 // var a = [];
 // console.log(a.length);
