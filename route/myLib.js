@@ -54,7 +54,10 @@ var my_book = function(req,res,result) {
 			}
 		}
 		else
+		{
+			console.log(data);
 			res.sendText("以注册");
+		}
 	});
 }
 
