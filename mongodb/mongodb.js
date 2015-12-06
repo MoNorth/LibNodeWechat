@@ -34,6 +34,25 @@ var select  = function(name,callback) {
 }
 
 
+var insert = function(obj,callback) {
+	dbOpen(function(ok,db,coll) {
+		if(!ok)
+		{
+			callback(false,db);
+			return;
+		}
+		coll.insert(obj,{safe:true},function(err,result) {
+			db.close();
+			if(err)
+			{
+				callback(false,err);
+				return;
+			}
+			callback(true,result);
+		})
+	})
+}
+
 
 var dbOpen = function(callback) {
 	db.open(function(err,db) {
@@ -56,7 +75,8 @@ var dbOpen = function(callback) {
 }
 
 
-// exports.select = select;
+exports.select = select;
+exports.insert = insert;
 
 
 
@@ -65,30 +85,30 @@ var dbOpen = function(callback) {
 
 
 
-db.open(function(err,db) {
-	if(err)
-	{
-		console.log(err);
-		return;
-	}
-	db.collection("test",{safe:true},function(err,collection) {
-		if(err)
-		{
-			console.log(err);
-			return;
-		}
-		collection.find({title:"接啊接啊就"}).toArray(function(err,docs) {
-			db.close();
-			console.log(docs);
+// db.open(function(err,db) {
+// 	if(err)
+// 	{
+// 		console.log(err);
+// 		return;
+// 	}
+// 	db.collection("test",{safe:true},function(err,collection) {
+// 		if(err)
+// 		{
+// 			console.log(err);
+// 			return;
+// 		}
+// 		collection.find({title:"接啊接啊就"}).toArray(function(err,docs) {
+// 			db.close();
+// 			console.log(docs);
 			
-		});
-		// collection.fineOne(function(err,doc) {
-		// 	console.log(doc);
-		// 	db.close();
-		// })
+// 		});
+// 		// collection.fineOne(function(err,doc) {
+// 		// 	console.log(doc);
+// 		// 	db.close();
+// 		// })
 
-	})
-});
+// 	})
+// });
 
 // var a = [];
 // console.log(a.length);
