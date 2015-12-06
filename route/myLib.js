@@ -19,7 +19,7 @@ var registered = function(req,res,result) {
 			psw : obj[1]
 		};
 		mongodb.insert(obj2,function(ok,result) {
-			if(!err)
+			if(!ok)
 			{
 				res.sendText("server error");
 				console.log(result);
