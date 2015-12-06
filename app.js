@@ -39,7 +39,8 @@ wechat.retext(function(ok,req,res,result) {
 
 
 wechat.reclick({
-	"ser_book":require("./route/search")
+	"ser_book":require("./route/search"),
+	"my_book" : require("./route/myLib")
 },"");
 
 
