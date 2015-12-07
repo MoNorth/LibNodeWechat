@@ -47,7 +47,7 @@ var gethistory = function(res) {
 					var news = [];
 					for(var i in body.Detail)
 					{
-						if(i === 9)
+						if(news.length > 9)
 							break;
 						news.push(new data(
 							body.Detail[i]["Title"],
