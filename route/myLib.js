@@ -38,7 +38,7 @@ var registered = function(req,res,result) {
 
 
 
-var my_book = function(req,res,result) {
+var fristButClick = function(req,res,result,callback) {
 	mongodb.select(result.fromusername,function(err,data) {
 		if(!err)
 		{
@@ -55,13 +55,34 @@ var my_book = function(req,res,result) {
 		}
 		else
 		{
-			console.log(data);
-			res.sendText("以注册");
+			callback(req,res,result);
 		}
+	});
+}
+
+
+var my_book = function(req,res,result) {
+	fristButClick(req,res,result,function(req,res,result) {
+		sendText("my_book");
+	});
+}
+var fav_book = function(req,res,result) {
+	fristButClick(req,res,result,function(req,res,result) {
+		sendText("fav_book");
+	});
+}
+var history_book = function(req,res,result) {
+	fristButClick(req,res,result,function(req,res,result) {
+		sendText("history_book");
 	});
 }
 
 
 
 
-module.exports = my_book;
+
+
+
+exports.my_book = my_book;
+exports.fav_book = fav_book;
+exports.history_book = history_book;

@@ -8,7 +8,7 @@ var express = require("express");
 var app = express();
 var wechat_node = require("wechat-node");
 var wechat = new wechat_node(app,"wx2d99e56a3326b348","d4624c36b6795d1d99dcf0547af5443d","northk");
-
+var myLib = require("./route/myLib");
 
 
 
@@ -40,7 +40,9 @@ wechat.retext(function(ok,req,res,result) {
 
 wechat.reclick({
 	"ser_book":require("./route/search"),
-	"my_book" : require("./route/myLib")
+	"my_book" : myLib.my_book,
+	"fav_book": myLib.fav_book,
+	"history_book" : myLib.history_book
 },"");
 
 
