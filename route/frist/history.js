@@ -49,12 +49,13 @@ var gethistory = function(res) {
 					{
 						if(news.length > 9)
 							break;
-						news.push(new data(
-							body.Detail[i]["Title"],
-							body.Detail[i]["Date"],
-							"https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png",
-							"http://node.northk.wang/book?barcode=" +body.Detail[i]["Barcode"]
-							));
+						if(body.Detail[i]["Type"] === "借书")
+							news.push(new data(
+								body.Detail[i]["Title"],
+								body.Detail[i]["Date"],
+								"https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png",
+								"http://node.northk.wang/book?barcode=" +body.Detail[i]["Barcode"]
+								));
 					}
 					res.sendNews(news);
 				}
@@ -63,7 +64,7 @@ var gethistory = function(res) {
 				res.sendText("server error");
 		}
 
-		);
+		);z
 	}
 }
 
