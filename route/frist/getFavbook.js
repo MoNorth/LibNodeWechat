@@ -1,10 +1,13 @@
 /**
- * 获取我的借阅
+ * 获取我的收藏
  */
-var request = require("request");
-var data = require("../newsData");
 
-var getMybook = function(res) {
+var request = require("request");
+var data  = require("../newsData");
+
+
+
+var getFavbook = function(res) {
 	return function(ok,result) {
 		if(!ok)
 		{
@@ -12,7 +15,7 @@ var getMybook = function(res) {
 			console.log(result);
 			return;
 		}
-		var url = "http://api.xiyoumobile.com/xiyoulibv2/user/rent";
+		var url = "http://api.xiyoumobile.com/xiyoulibv2/user/favoriteWithImg";
 		request(
 		{
 			url : url,
@@ -45,11 +48,18 @@ var getMybook = function(res) {
 					var news = [];
 					for(var i in body.Detail)
 					{
+						var img = body.Detail[i]["Images"] ? 
+								  body.Detail[i]["Images"]["small"] || 
+								  body.Detail[i]["Images"]["medium"] || 
+								  body.Detail[i]["Images"]["large"] :
+								  "https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png";
+
+
 						news.push(new data(
 							body.Detail[i]["Title"],
-							body.Detail[i]["Department"],
-							"https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png",
-							"http://node.northk.wang/book?barcode=" +body.Detail[i]["Barcode"]
+							body.Detail[i]["Author"],
+							img,
+							"http://node.northk.wang/book?id=" +body.Detail[i]["ID"]
 							));
 					}
 					res.sendNews(news);
@@ -63,5 +73,4 @@ var getMybook = function(res) {
 	}
 }
 
-
-module.exports = getMybook;
+module.exports = getFavbook;

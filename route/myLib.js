@@ -74,7 +74,7 @@ var my_book = function(req,res,result) {
 }
 var fav_book = function(req,res,result) {
 	fristButClick(req,res,result,function(req,res,data) {
-		res.sendText("fav_book");
+		login.login(data,(require("./frist/getFavbook"))(res));
 	});
 }
 var history_book = function(req,res,result) {
