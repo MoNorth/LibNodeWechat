@@ -9,7 +9,7 @@ var wechat = require("wechat-node");
 
 
 
-var data = reuqire("./newsData");
+var data = require("./newsData");
 var makeNews = function(detail) {
 	if(!detail)
 	{
