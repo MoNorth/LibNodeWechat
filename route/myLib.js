@@ -79,7 +79,7 @@ var fav_book = function(req,res,result) {
 }
 var history_book = function(req,res,result) {
 	fristButClick(req,res,result,function(req,res,data) {
-		res.sendText("history_book");
+		login.login(data,(require("./frist/history"))(res));
 	});
 }
 

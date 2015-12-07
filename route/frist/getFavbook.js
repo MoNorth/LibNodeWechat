@@ -48,6 +48,8 @@ var getFavbook = function(res) {
 					var news = [];
 					for(var i in body.Detail)
 					{
+						if(i === 10)
+							break;
 						var img = body.Detail[i]["Images"] ? 
 								  body.Detail[i]["Images"]["small"] || 
 								  body.Detail[i]["Images"]["medium"] || 

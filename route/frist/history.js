@@ -1,10 +1,12 @@
 /**
- * 获取我的借阅
+ * 查看历史借阅
  */
 var request = require("request");
-var data = require("../newsData");
+var data  = require("../newsData");
 
-var getMybook = function(res) {
+
+
+var gethistory = function(res) {
 	return function(ok,result) {
 		if(!ok)
 		{
@@ -12,7 +14,7 @@ var getMybook = function(res) {
 			console.log(result);
 			return;
 		}
-		var url = "http://api.xiyoumobile.com/xiyoulibv2/user/rent";
+		var url = "http://api.xiyoumobile.com/xiyoulibv2/user/history";
 		request(
 		{
 			url : url,
@@ -49,7 +51,7 @@ var getMybook = function(res) {
 							break;
 						news.push(new data(
 							body.Detail[i]["Title"],
-							body.Detail[i]["Department"],
+							body.Detail[i]["Date"],
 							"https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png",
 							"http://node.northk.wang/book?barcode=" +body.Detail[i]["Barcode"]
 							));
@@ -65,5 +67,4 @@ var getMybook = function(res) {
 	}
 }
 
-
-module.exports = getMybook;
+module.exports = gethistory;
