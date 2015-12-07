@@ -3,10 +3,8 @@
  */
 var mongodb = require("../mongodb/mongodb");
 var wechat = require("wechat-node");
+var login = require("./frist/login");
 
-var login = function(req,res) {
-	
-}
 
 var registered = function(req,res,result) {
 	var content = result.content;
@@ -18,19 +16,27 @@ var registered = function(req,res,result) {
 			uid : obj[0],
 			psw : obj[1]
 		};
-		mongodb.insert(obj2,function(ok,result) {
+		login.login(obj2,function(ok,result) {
 			if(!ok)
 			{
-				res.sendText("server error");
+				res.sendText("用户名或密码错误");
 				console.log(result);
+				return;
 			}
-			else
-			{
-				res.sendText("注册成功");
-				console.log(result);
-			}
-		})
+			mongodb.insert(obj2,function(ok,result) {
+				if(!ok)
+				{
+					res.sendText("server error");
+					console.log(result);
+				}
+				else
+				{
+					res.sendText("注册成功");
+					console.log(result);
+				}
+			})
 
+		})
 	}
 	else
 		res.sendText("输入错误");
@@ -63,7 +69,7 @@ var fristButClick = function(req,res,result,callback) {
 
 var my_book = function(req,res,result) {
 	fristButClick(req,res,result,function(req,res,result) {
-		res.sendText("my_book");
+		
 	});
 }
 var fav_book = function(req,res,result) {
