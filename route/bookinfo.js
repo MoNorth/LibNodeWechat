@@ -2,8 +2,18 @@
 var request = require("request");
 
 function bookinfo (req,res,next) {
-	var id = req.query.id;
-	var url = "http://api.xiyoumobile.com/xiyoulibv2/book/detail/id/" + id;
+	var url = "";
+	if(req.query.id)
+	{
+		var id = req.query.id;
+		url = "http://api.xiyoumobile.com/xiyoulibv2/book/detail/id/" + id;
+	}
+	else
+	{
+		var barcode = req.query.barcode;
+		url = "http://api.xiyoumobile.com/xiyoulibv2/book/detail/barcode/" + barcode;
+	}
+	
 	request(
 		{
 			url : url,

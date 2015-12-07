@@ -54,7 +54,7 @@ var getMybook = function(res) {
 							body.Detail[i]["Title"],
 							body.Detail[i]["Department"],
 							"https://gss0.bdstatic.com/5eR1dDebRNRTm2_p8IuM_a/res/img/logo/logo201509091.png",
-							"http://north.gitcafe.io"
+							"http://node.northk.wang/book?barcode=" +body.Detail[i]["Barcode"]
 							));
 					}
 					res.sendNews(news);
