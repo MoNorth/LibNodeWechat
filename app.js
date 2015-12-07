@@ -29,7 +29,17 @@ wechat.use("session");
 
 
 wechat.retext(function(ok,req,res,result) {
-	res.sendText("暂时不能自动回复");
+	// res.sendText("暂时不能自动回复");
+	res.sendNews([
+	{
+		Title : "标题",
+		Description : "第一行
+		第二行,
+		第三行
+		第四航"
+	}
+
+		]);
 });
 
 
