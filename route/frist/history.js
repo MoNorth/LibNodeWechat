@@ -64,7 +64,7 @@ var gethistory = function(res) {
 				res.sendText("server error");
 		}
 
-		);z
+		);
 	}
 }
 
