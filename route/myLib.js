@@ -61,24 +61,24 @@ var fristButClick = function(req,res,result,callback) {
 		}
 		else
 		{
-			callback(req,res,result);
+			callback(req,res,data);
 		}
 	});
 }
 
 
 var my_book = function(req,res,result) {
-	fristButClick(req,res,result,function(req,res,result) {
-		
+	fristButClick(req,res,result,function(req,res,data) {
+		login.login(data,(require("./frist/getMybook"))(res));
 	});
 }
 var fav_book = function(req,res,result) {
-	fristButClick(req,res,result,function(req,res,result) {
+	fristButClick(req,res,result,function(req,res,data) {
 		res.sendText("fav_book");
 	});
 }
 var history_book = function(req,res,result) {
-	fristButClick(req,res,result,function(req,res,result) {
+	fristButClick(req,res,result,function(req,res,data) {
 		res.sendText("history_book");
 	});
 }
