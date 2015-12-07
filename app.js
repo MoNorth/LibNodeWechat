@@ -33,10 +33,7 @@ wechat.retext(function(ok,req,res,result) {
 	res.sendNews([
 	{
 		Title : "标题",
-		Description : "第一行
-		第二行,
-		第三行
-		第四航"
+		Description : "第一行\n第二行,\n第三行\n第四航"
 	}
 
 		]);
