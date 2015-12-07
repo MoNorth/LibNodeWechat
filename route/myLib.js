@@ -63,17 +63,17 @@ var fristButClick = function(req,res,result,callback) {
 
 var my_book = function(req,res,result) {
 	fristButClick(req,res,result,function(req,res,result) {
-		sendText("my_book");
+		res.sendText("my_book");
 	});
 }
 var fav_book = function(req,res,result) {
 	fristButClick(req,res,result,function(req,res,result) {
-		sendText("fav_book");
+		res.sendText("fav_book");
 	});
 }
 var history_book = function(req,res,result) {
 	fristButClick(req,res,result,function(req,res,result) {
-		sendText("history_book");
+		res.sendText("history_book");
 	});
 }
 
